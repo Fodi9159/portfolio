@@ -4,22 +4,30 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+type Post = {
+  id: number;
+  title: string;
+  slug: string;
+  created_at: string;
+  published: number;
+};
+
 export default function AdminDashboard() {
-  const [posts, setPosts] = useState([]);
-  const [auth, setAuth] = useState(() => {
-    if (typeof window !== 'undefined')
-      return sessionStorage.getItem('admin_auth') === 'true';
-    return false;
-  });
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth) {
-      router.push('/admin/login');
-      return;
-    }
     (async () => {
+      // Verify auth via cookie
+      const authRes = await fetch('/api/auth/me');
+      if (!authRes.ok) {
+        router.push('/admin/login');
+        return;
+      }
+      setAuthChecked(true);
+
       try {
         const res = await fetch('/api/posts');
         if (res.ok) setPosts(await res.json());
@@ -28,9 +36,9 @@ export default function AdminDashboard() {
       }
       setLoading(false);
     })();
-  }, [auth, router]);
+  }, [router]);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: number) => {
     if (!confirm('Delete this post?')) return;
     const res = await fetch(`/api/posts/${id}`, { method: 'DELETE' });
     if (res.ok) {
@@ -39,12 +47,12 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('admin_auth');
+  const handleLogout = async () => {
+    await fetch('/api/auth/me', { method: 'POST' });
     router.push('/admin/login');
   };
 
-  if (!auth) return null;
+  if (!authChecked) return null;
 
   return (
     <div className="max-w-4xl mx-auto py-12">

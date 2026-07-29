@@ -4,29 +4,29 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function NewPostPage() {
-  const [auth, setAuth] = useState(() => {
-    if (typeof window !== 'undefined')
-      return sessionStorage.getItem('admin_auth') === 'true';
-    return false;
-  });
+  const [authChecked, setAuthChecked] = useState(false);
   const [form, setForm] = useState({ title: '', slug: '', content: '', excerpt: '' });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth) router.push('/admin/login');
-  }, [auth, router]);
+    (async () => {
+      const res = await fetch('/api/auth/me');
+      if (!res.ok) router.push('/admin/login');
+      else setAuthChecked(true);
+    })();
+  }, [router]);
 
-  const generateSlug = (title) => {
+  const generateSlug = (title: string) => {
     return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   };
 
-  const handleTitleChange = (title) => {
+  const handleTitleChange = (title: string) => {
     setForm({ ...form, title, slug: generateSlug(title) });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     setError('');
@@ -48,7 +48,7 @@ export default function NewPostPage() {
     setSaving(false);
   };
 
-  if (!auth) return null;
+  if (!authChecked) return null;
 
   return (
     <div className="max-w-3xl mx-auto py-12">
@@ -89,7 +89,7 @@ export default function NewPostPage() {
           <label className="block text-sm text-secondary mb-1.5">Content (Markdown)</label>
           <textarea
             required
-            rows="15"
+            rows={15}
             value={form.content}
             onChange={e => setForm({ ...form, content: e.target.value })}
             className="w-full px-4 py-2.5 bg-surface border border-border rounded-lg text-primary text-sm font-mono focus:border-accent/40 transition-colors resize-y"

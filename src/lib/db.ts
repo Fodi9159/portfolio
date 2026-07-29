@@ -43,11 +43,15 @@ function initDB() {
     );
   `);
 
-  // Seed default admin if not exists
+  // Seed default admin if not exists (read password from env, or generate random)
   const admin = db.prepare('SELECT id FROM admin LIMIT 1').get();
   if (!admin) {
-    const hashed = bcrypt.hashSync('admin123', 10);
+    const defaultPassword = process.env.ADMIN_PASSWORD || crypto.randomUUID().slice(0, 16);
+    const hashed = bcrypt.hashSync(defaultPassword, 10);
     db.prepare('INSERT INTO admin (username, password) VALUES (?, ?)').run('admin', hashed);
+    if (!process.env.ADMIN_PASSWORD) {
+      console.log(`[portfolio] Admin password not set via ADMIN_PASSWORD env var. Generated random password: ${defaultPassword}`);
+    }
   }
 
   // Seed sample blog posts if empty

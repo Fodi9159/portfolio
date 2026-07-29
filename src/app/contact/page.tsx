@@ -64,7 +64,7 @@ export default function ContactPage() {
             <label className="block text-sm text-secondary mb-1.5">Message</label>
             <textarea
               required
-              rows="5"
+              rows={5}
               value={form.message}
               onChange={e => setForm({ ...form, message: e.target.value })}
               className="w-full px-4 py-2.5 bg-surface border border-border rounded-lg text-primary text-sm placeholder:text-muted focus:border-accent/40 transition-colors resize-none"

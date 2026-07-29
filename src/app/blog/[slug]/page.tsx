@@ -1,29 +1,21 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
-
-async function getPost(slug) {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const res = await fetch(`${base}/api/posts?slug=${slug}`, { cache: 'no-store' });
-  if (!res.ok) return null;
-  return res.json();
-}
+import { getDB } from '@/lib/db';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  try {
-    const res = await fetch(`${base}/api/posts?slug=${slug}`, { cache: 'no-store' });
-    if (res.ok) {
-      const post = await res.json();
-      return { title: `${post.title} — Portfolio`, description: post.excerpt || post.title };
-    }
-  } catch {}
+  const db = getDB();
+  const post = db.prepare('SELECT title, excerpt FROM posts WHERE slug = ? AND published = 1').get(slug);
+  if (post) {
+    return { title: `${post.title} — Portfolio`, description: post.excerpt || post.title };
+  }
   return { title: 'Post — Portfolio' };
 }
 
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const db = getDB();
+  const post = db.prepare('SELECT * FROM posts WHERE slug = ? AND published = 1').get(slug);
 
   if (!post) {
     return (

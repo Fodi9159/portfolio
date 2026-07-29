@@ -1,16 +1,11 @@
 import Link from 'next/link';
-
-async function getPosts() {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const res = await fetch(`${base}/api/posts`, { cache: 'no-store' });
-  if (!res.ok) return [];
-  return res.json();
-}
+import { getDB } from '@/lib/db';
 
 export const metadata = { title: 'Blog — Portfolio', description: 'Thoughts, notes, and things I have learned building software.' };
 
 export default async function BlogPage() {
-  const posts = await getPosts();
+  const db = getDB();
+  const posts = db.prepare('SELECT id, title, slug, excerpt, created_at FROM posts WHERE published = 1 ORDER BY created_at DESC').all();
 
   return (
     <div className="max-w-3xl mx-auto py-20">
