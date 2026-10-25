@@ -29,6 +29,12 @@ describe('AboutPage', () => {
 
   it('mentions full-stack in content', () => {
     render(<AboutPage />);
-    expect(screen.getByText(/full-stack application/)).toBeInTheDocument();
+    expect(screen.getAllByText(/full-stack application/).length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('explains how the site was built with AI', () => {
+    render(<AboutPage />);
+    expect(screen.getByText('How I Built It')).toBeInTheDocument();
+    expect(screen.getByText(/reviewed what AI produced/)).toBeInTheDocument();
   });
 });

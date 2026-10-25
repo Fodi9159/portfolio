@@ -20,7 +20,12 @@ describe('HomePage', () => {
 
   it('renders the subtitle', () => {
     render(<HomePage />);
-    expect(screen.getByText(/A portfolio built from scratch/)).toBeInTheDocument();
+    expect(screen.getByText(/designed, architected, and shipped/)).toBeInTheDocument();
+  });
+
+  it('discloses AI assistance honestly', () => {
+    render(<HomePage />);
+    expect(screen.getByText(/with AI as my pair-programmer/)).toBeInTheDocument();
   });
 
   it('renders View Projects link', () => {

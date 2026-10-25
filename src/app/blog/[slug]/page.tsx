@@ -7,9 +7,9 @@ export async function generateMetadata({ params }) {
   const db = getDB();
   const post = db.prepare('SELECT title, excerpt FROM posts WHERE slug = ? AND published = 1').get(slug);
   if (post) {
-    return { title: `${post.title} — Portfolio`, description: post.excerpt || post.title };
+    return { title: `${post.title} | Portfolio`, description: post.excerpt || post.title };
   }
-  return { title: 'Post — Portfolio' };
+  return { title: 'Post | Portfolio' };
 }
 
 export default async function BlogPostPage({ params }) {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getDB } from '@/lib/db';
 
-export const metadata = { title: 'Blog — Portfolio', description: 'Thoughts, notes, and things I have learned building software.' };
+export const metadata = { title: 'Blog | Portfolio', description: 'Thoughts, notes, and things I have learned building software.' };
 
 export default async function BlogPage() {
   const db = getDB();

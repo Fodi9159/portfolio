@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const metadata = { title: 'Portfolio — Full-Stack Developer', description: 'A portfolio built from scratch — front-end, back-end, database, and deployment.' };
+export const metadata = { title: 'Portfolio | Full-Stack Developer', description: 'A portfolio built from scratch: front-end, back-end, database, and deployment.' };
 
 export default function HomePage() {
   return (
@@ -16,8 +16,8 @@ export default function HomePage() {
           for the <span className="text-accent">web</span>.
         </h1>
         <p className="mt-6 text-lg text-secondary max-w-xl leading-relaxed">
-          A portfolio built from scratch — front-end, back-end, database, and deployment.
-          Every piece of this site was built by hand.
+          A portfolio I designed, architected, and shipped end to end, with AI as my
+          pair-programmer. The decisions and the debugging are mine.
         </p>
         <div className="flex gap-4 mt-8">
           <Link
@@ -42,7 +42,7 @@ export default function HomePage() {
       <section className="pb-24">
         <div className="grid sm:grid-cols-3 gap-4">
           {[
-            { title: 'Frontend', desc: 'React, Next.js, Tailwind CSS — responsive, modern UIs', href: '/about' },
+            { title: 'Frontend', desc: 'React, Next.js, Tailwind CSS: responsive, modern UIs', href: '/about' },
             { title: 'Backend', desc: 'API routes, databases, authentication, server logic', href: '/about' },
             { title: 'Database', desc: 'SQLite, data modeling, CRUD operations', href: '/blog' },
           ].map(card => (

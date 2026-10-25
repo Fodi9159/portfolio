@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function AdminLoginPage() {
+function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -33,10 +33,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-canvas">
-      <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-primary text-center mb-8">Admin Login</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm text-secondary mb-1.5">Username</label>
             <input
@@ -65,7 +62,18 @@ export default function AdminLoginPage() {
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
-        </form>
+    </form>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-canvas">
+      <div className="w-full max-w-sm">
+        <h1 className="text-2xl font-bold text-primary text-center mb-8">Admin Login</h1>
+        <Suspense fallback={<p className="text-secondary text-sm text-center">Loading...</p>}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   );

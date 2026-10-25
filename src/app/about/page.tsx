@@ -1,4 +1,4 @@
-export const metadata = { title: 'About — Portfolio', description: 'Full-stack developer — building things for the web.' };
+export const metadata = { title: 'About | Portfolio', description: 'Full-stack developer, building things for the web.' };
 
 export default function AboutPage() {
   return (
@@ -7,8 +7,9 @@ export default function AboutPage() {
 
       <div className="space-y-6 text-secondary leading-relaxed">
         <p className="text-lg text-primary">
-          I&apos;m a developer who learned by building. This site is proof of that —
-          every line of code, from the pixel on screen to the database in the back, was written by me.
+          I&apos;m a developer who learned by building. This site is proof of that:
+          a full-stack application I designed, architected, and shipped myself,
+          working with AI the way professional developers do.
         </p>
 
         <h2 className="text-xl font-semibold text-primary mt-10 mb-3">What I Can Do</h2>
@@ -17,7 +18,7 @@ export default function AboutPage() {
           {[
             { title: 'HTML & CSS', desc: 'Responsive layouts, animations, clean design' },
             { title: 'JavaScript / React', desc: 'Interactive UIs, components, state management' },
-            { title: 'Next.js', desc: 'Full-stack React — pages, APIs, deployment' },
+            { title: 'Next.js', desc: 'Full-stack React: pages, APIs, deployment' },
             { title: 'Databases & APIs', desc: 'SQLite, REST endpoints, CRUD, auth' },
             { title: 'Git & Deployment', desc: 'Version control, hosting on Vercel' },
             { title: 'Problem Solving', desc: 'Breaking problems down, debugging, learning fast' },
@@ -29,10 +30,22 @@ export default function AboutPage() {
           ))}
         </div>
 
+        <h2 className="text-xl font-semibold text-primary mt-10 mb-3">How I Built It</h2>
+        <p>
+          AI helped me write code faster, but speed isn&apos;t the point. Every architectural
+          decision here is mine: the data model, the auth flow, the API design, and how the
+          pages fit together. I reviewed what AI produced, broke it, fixed it, and added the
+          test suite that keeps it honest.
+        </p>
+        <p>
+          That&apos;s the real skill on display: knowing what to build, and being able to tell
+          whether the code in front of you is right.
+        </p>
+
         <h2 className="text-xl font-semibold text-primary mt-10 mb-3">Why This Site?</h2>
         <p>
-          When job applications ask &quot;have you ever built a website?&quot; — I wanted a real answer.
-          Not a tutorial project, not a template. Something I built from nothing, that I can explain
+          When job applications ask &quot;have you ever built a website?&quot; I wanted a real answer.
+          Not a tutorial project, not a template. Something I designed from nothing, that I can explain
           piece by piece.
         </p>
         <p>

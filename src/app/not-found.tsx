@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const metadata = { title: '404 — Page Not Found' };
+export const metadata = { title: '404 | Page Not Found' };
 
 export default function NotFound() {
   return (
