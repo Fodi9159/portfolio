@@ -39,10 +39,6 @@ const portfolioFeatures: Feature[] = [
     title: 'Markdown blog',
     desc: 'Posts stored in SQLite, rendered with react-markdown, served at clean slug-based URLs.',
   },
-  {
-    title: 'Test suite',
-    desc: 'Vitest and Testing Library tests covering the pages and components that matter.',
-  },
 ];
 
 const featured: Project[] = [
@@ -200,7 +196,7 @@ export default function ProjectsPage() {
             description:
               'A full-stack application with a real front-end, a real back-end, and a real database. It has public pages, a markdown blog, a contact form that persists submissions, and a password-protected admin area for writing and editing posts. Every architectural decision, the data model, the auth flow, the API design, and the page structure, is mine.',
             features: portfolioFeatures,
-            stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'SQLite', 'JWT', 'Vitest'],
+            stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'SQLite', 'JWT'],
             localLabel: 'This site',
           }}
         />
@@ -236,8 +232,8 @@ export default function ProjectsPage() {
           I used AI as a pair-programmer throughout: for boilerplate, explanations, and debugging
           help. The architectural decisions are mine. The data model, the auth flow, the API design,
           the page structure, and the hard problems in the tools above, were chosen by me. I reviewed
-          what AI produced, broke it, fixed it, and added the test suites that keep the results
-          honest. Disclosing this because it is the accurate description of how the work was done.
+          what AI produced, broke it, and fixed it. Disclosing this because it is the accurate
+          description of how the work was done.
         </p>
         <Link
           href="/about"

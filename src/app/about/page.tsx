@@ -39,7 +39,7 @@ export default function AboutPage() {
             { title: 'Next.js / React', desc: 'App Router, server and client components, TypeScript end to end' },
             { title: 'Databases & APIs', desc: 'SQLite, REST endpoints, CRUD, authentication' },
             { title: 'Java / Android', desc: 'Accessibility services, foreground services, system APIs' },
-            { title: 'Git & Testing', desc: 'Version control, Vitest and Testing Library, integration tests' },
+            { title: 'Git', desc: 'Version control, branching, merge workflows' },
           ].map(skill => (
             <div key={skill.title} className="p-4 rounded-xl border border-border bg-surface">
               <h3 className="text-primary text-sm font-semibold mb-1">{skill.title}</h3>
@@ -52,8 +52,7 @@ export default function AboutPage() {
         <p>
           AI helped me write code faster, but speed isn&apos;t the point. Every architectural
           decision here is mine: the data model, the auth flow, the API design, and how the
-          pages fit together. I reviewed what AI produced, broke it, fixed it, and added the
-          test suite that keeps it honest.
+          pages fit together. I reviewed what AI produced, broke it, and fixed it.
         </p>
         <p>
           That&apos;s the real skill on display: knowing what to build, and being able to tell

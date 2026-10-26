@@ -24,7 +24,7 @@ describe('AboutPage', () => {
     expect(screen.getByText('Next.js / React')).toBeInTheDocument();
     expect(screen.getByText('Databases & APIs')).toBeInTheDocument();
     expect(screen.getByText('Java / Android')).toBeInTheDocument();
-    expect(screen.getByText('Git & Testing')).toBeInTheDocument();
+    expect(screen.getByText('Git')).toBeInTheDocument();
   });
 
   it('mentions the full-stack application', () => {
