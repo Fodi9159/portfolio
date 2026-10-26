@@ -20,7 +20,6 @@ Not deployed yet. To see it running locally, follow the setup below.
 - **Markdown blog**: posts stored in SQLite and rendered with react-markdown at slug URLs
 - **Contact form**: submissions validated and persisted to the database
 - **REST API**: posts CRUD, contact submission, and session endpoints
-- **Test suite**: Vitest + Testing Library covering pages and components
 
 ## Tech stack
 
@@ -31,7 +30,6 @@ Not deployed yet. To see it running locally, follow the setup below.
 | UI        | React 19, Tailwind CSS 4                 |
 | Database  | SQLite (better-sqlite3)                  |
 | Auth      | jsonwebtoken, bcryptjs                   |
-| Testing   | Vitest, Testing Library, jsdom           |
 
 ## Getting started
 
@@ -73,8 +71,6 @@ Open http://localhost:3000. The admin panel is at http://localhost:3000/admin.
 | `npm run dev`        | Start the dev server with hot reload  |
 | `npm run build`      | Build the production bundle           |
 | `npm run start`      | Serve the production build            |
-| `npm run test`       | Run the test suite once               |
-| `npm run test:watch` | Run tests in watch mode                |
 | `npm run lint`       | Lint the codebase                     |
 
 ## Project structure
@@ -98,7 +94,6 @@ src/
   lib/
     db.ts                 Database connection, schema, seeding
     auth.ts               Token signing, verification, session
-  __tests__/              Vitest + Testing Library suites
 ```
 
 ## Database
@@ -114,20 +109,11 @@ SQLite, stored as `portfolio.db` in the project root. Three tables:
 The schema is created automatically on first run, along with a default admin user and three
 sample posts. The database file is gitignored, so it is never committed.
 
-## Testing
-
-```bash
-npm run test
-```
-
-The suite covers the home, about, and 404 pages, plus the header and footer components,
-using jsdom as the environment.
-
 ## A note on how this was built
 
 I used AI as a pair-programmer throughout: for boilerplate, explanations, and debugging help.
 The architectural decisions are mine. The data model, the auth flow, the API design, and the
-page structure were chosen by me, and the test suite was added by me to keep the result honest.
+page structure were chosen by me.
 Disclosing this because it is the accurate description of how the work was done.
 
 ## Other projects
