@@ -7,9 +7,21 @@ publishing blog posts.
 The point of this project was to answer a real question, "have you built something you can
 explain piece by piece?" This is that something.
 
-## Live demo
+## Deploying
 
-Not deployed yet. To see it running locally, follow the setup below.
+The contact form, admin panel and blog need a writable SQLite file, so the
+database location is configurable. On a host, point it at a persistent volume
+so data survives restarts.
+
+| Variable       | Required        | Purpose                                                        |
+| -------------- | --------------- | -------------------------------------------------------------- |
+| `DATABASE_PATH`| on a host       | Path to the SQLite file, e.g. `/data/portfolio.db`             |
+| `JWT_SECRET`   | in production   | Signs admin sessions. The server refuses to sign tokens without it |
+| `ADMIN_PASSWORD`| recommended    | Admin password. A random one is generated and printed if unset |
+
+## Running locally
+
+To see it running locally, follow the setup below.
 
 ## Features
 

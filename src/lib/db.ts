@@ -1,8 +1,12 @@
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 import bcrypt from 'bcryptjs';
 
-const dbPath = path.join(process.cwd(), 'portfolio.db');
+// Hosts mount a persistent volume at a known path (e.g. /data on Railway or
+// Render). Point DATABASE_PATH at it, otherwise fall back to the project root.
+const dbPath = process.env.DATABASE_PATH || path.join(process.cwd(), 'portfolio.db');
+fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 
 let db;
 
