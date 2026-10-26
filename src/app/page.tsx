@@ -1,6 +1,10 @@
 import Link from 'next/link';
 
-export const metadata = { title: 'Portfolio | Full-Stack Developer', description: 'A portfolio built from scratch: front-end, back-end, database, and deployment.' };
+export const metadata = {
+  title: 'Portfolio | Software Developer',
+  description:
+    'A software developer who builds Windows system tools, native desktop apps, and full-stack web applications.',
+};
 
 export default function HomePage() {
   return (
@@ -8,16 +12,17 @@ export default function HomePage() {
       {/* Hero */}
       <section className="min-h-[70vh] flex flex-col justify-center">
         <p className="text-accent text-sm font-medium mb-4 tracking-widest uppercase">
-          Full-Stack Developer
+          Software Developer
         </p>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary leading-tight">
           I build things
           <br />
-          for the <span className="text-accent">web</span>.
+          that <span className="text-accent">work</span>.
         </h1>
         <p className="mt-6 text-lg text-secondary max-w-xl leading-relaxed">
-          A portfolio I designed, architected, and shipped end to end, with AI as my
-          pair-programmer. The decisions and the debugging are mine.
+          Windows system tools, native desktop apps, and full-stack web applications. Designed,
+          architected, and shipped by me, with AI as my pair-programmer. The decisions and the
+          debugging are mine.
         </p>
         <div className="flex gap-4 mt-8">
           <Link
@@ -31,7 +36,7 @@ export default function HomePage() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-secondary text-sm font-medium rounded-lg border border-border hover:text-primary hover:border-[var(--border)] transition-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-secondary text-sm font-medium rounded-lg border border-border hover:text-primary transition-all"
           >
             Contact Me
           </Link>
@@ -42,9 +47,21 @@ export default function HomePage() {
       <section className="pb-24">
         <div className="grid sm:grid-cols-3 gap-4">
           {[
-            { title: 'Frontend', desc: 'React, Next.js, Tailwind CSS: responsive, modern UIs', href: '/about' },
-            { title: 'Backend', desc: 'API routes, databases, authentication, server logic', href: '/about' },
-            { title: 'Database', desc: 'SQLite, data modeling, CRUD operations', href: '/blog' },
+            {
+              title: 'Windows & Desktop',
+              desc: 'C# and Win32: window management, process control, system tray apps, input hooks',
+              href: '/projects',
+            },
+            {
+              title: 'Web',
+              desc: 'Next.js, React, TypeScript: full-stack apps with APIs, databases, and auth',
+              href: '/projects',
+            },
+            {
+              title: 'Mobile',
+              desc: 'Android and Java: accessibility services, foreground services, system APIs',
+              href: '/projects',
+            },
           ].map(card => (
             <Link key={card.title} href={card.href} className="group p-5 rounded-xl border border-border bg-surface hover:shadow-border transition-all">
               <h3 className="text-primary text-sm font-semibold mb-1.5">{card.title}</h3>

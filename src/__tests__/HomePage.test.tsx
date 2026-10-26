@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import HomePage from '@/app/page';
 
-// Mock next/navigation and next/link
 vi.mock('next/navigation', () => ({
   usePathname: () => '/',
 }));
@@ -15,12 +14,17 @@ vi.mock('next/link', () => ({
 describe('HomePage', () => {
   it('renders the hero heading', () => {
     render(<HomePage />);
-    expect(screen.getByRole('heading', { name: /I build things.*for the.*web/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /I build things.*that.*work/i })).toBeInTheDocument();
+  });
+
+  it('presents the role as software developer, not web-only', () => {
+    render(<HomePage />);
+    expect(screen.getByText('Software Developer')).toBeInTheDocument();
   });
 
   it('renders the subtitle', () => {
     render(<HomePage />);
-    expect(screen.getByText(/designed, architected, and shipped/)).toBeInTheDocument();
+    expect(screen.getByText(/Designed,\s*architected, and shipped/)).toBeInTheDocument();
   });
 
   it('discloses AI assistance honestly', () => {
@@ -38,10 +42,10 @@ describe('HomePage', () => {
     expect(screen.getByText('Contact Me')).toBeInTheDocument();
   });
 
-  it('renders skill cards', () => {
+  it('covers all three platforms', () => {
     render(<HomePage />);
-    expect(screen.getByText('Frontend')).toBeInTheDocument();
-    expect(screen.getByText('Backend')).toBeInTheDocument();
-    expect(screen.getByText('Database')).toBeInTheDocument();
+    expect(screen.getByText('Windows & Desktop')).toBeInTheDocument();
+    expect(screen.getByText('Web')).toBeInTheDocument();
+    expect(screen.getByText('Mobile')).toBeInTheDocument();
   });
 });

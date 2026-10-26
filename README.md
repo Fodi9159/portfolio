@@ -130,6 +130,19 @@ The architectural decisions are mine. The data model, the auth flow, the API des
 page structure were chosen by me, and the test suite was added by me to keep the result honest.
 Disclosing this because it is the accurate description of how the work was done.
 
+## Other projects
+
+This repository is the portfolio site itself. The projects page also covers the other
+things I have built, each with its own repository:
+
+| Project | What it is |
+| ------- | ---------- |
+| [Process Suspender](https://github.com/Fodi9159/ProcessSuspender) | Windows tray app that freezes a game when it loses focus and resumes it on return |
+| [WindowMaximizer](https://github.com/Fodi9159/WindowMaximizer) | Windows tray app that remembers whether each window was closed maximized |
+| [FsoTuner](https://github.com/Fodi9159/FsoTuner) | Native Windows 11 app for controlling Fullscreen Optimizations |
+| [Volume Limiter](https://github.com/Fodi9159/VolumeLimiter) | Android TV app that caps the maximum volume |
+| [G-Helper](https://github.com/Fodi9159/g-helper) | A fork of seerge/g-helper with my own additions on top |
+
 ## License
 
 MIT

@@ -19,22 +19,27 @@ describe('AboutPage', () => {
 
   it('renders skill cards', () => {
     render(<AboutPage />);
-    expect(screen.getByText('HTML & CSS')).toBeInTheDocument();
-    expect(screen.getByText('JavaScript / React')).toBeInTheDocument();
-    expect(screen.getByText('Next.js')).toBeInTheDocument();
+    expect(screen.getByText('C# / .NET')).toBeInTheDocument();
+    expect(screen.getByText('Windows API')).toBeInTheDocument();
+    expect(screen.getByText('Next.js / React')).toBeInTheDocument();
     expect(screen.getByText('Databases & APIs')).toBeInTheDocument();
-    expect(screen.getByText('Git & Deployment')).toBeInTheDocument();
-    expect(screen.getByText('Problem Solving')).toBeInTheDocument();
+    expect(screen.getByText('Java / Android')).toBeInTheDocument();
+    expect(screen.getByText('Git & Testing')).toBeInTheDocument();
   });
 
-  it('mentions full-stack in content', () => {
+  it('mentions the full-stack application', () => {
     render(<AboutPage />);
-    expect(screen.getAllByText(/full-stack application/).length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByText(/full-stack application/).length).toBeGreaterThanOrEqual(1);
   });
 
   it('explains how the site was built with AI', () => {
     render(<AboutPage />);
     expect(screen.getByText('How I Built It')).toBeInTheDocument();
     expect(screen.getByText(/reviewed what AI produced/)).toBeInTheDocument();
+  });
+
+  it('explains where the projects came from', () => {
+    render(<AboutPage />);
+    expect(screen.getByText('Why These Projects?')).toBeInTheDocument();
   });
 });

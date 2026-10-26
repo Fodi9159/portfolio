@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'Portfolio | Full-Stack Developer',
-  description: 'A full-stack portfolio built from scratch with Next.js.',
+  title: 'Portfolio | Software Developer',
+  description:
+    'Windows system tools, native desktop apps, and full-stack web applications, built and explained piece by piece.',
 };
 
 export default function RootLayout({ children }) {
