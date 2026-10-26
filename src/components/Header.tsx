@@ -22,7 +22,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-canvas/80 backdrop-blur-lg">
       <div className="max-w-4xl mx-auto h-16 flex items-center justify-between px-6 md:px-10">
         <Link href="/" className="text-lg font-semibold tracking-tight text-primary">
-          Portfolio<span className="text-accent">.</span>
+          Mufeed Batis<span className="text-accent">.</span>
         </Link>
 
         <button

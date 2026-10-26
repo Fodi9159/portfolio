@@ -24,8 +24,8 @@ const portfolioFeatures: Feature[] = [
     desc: 'App Router with Server Components for pages and Client Components for interactivity, in TypeScript end to end.',
   },
   {
-    title: 'SQLite database',
-    desc: 'better-sqlite3 with WAL mode, plus a hand-written schema for posts, contacts, and the admin user.',
+    title: 'Postgres database',
+    desc: 'Postgres on Supabase, with a hand-written schema for posts, contacts, and the admin user.',
   },
   {
     title: 'Authentication',
@@ -37,7 +37,7 @@ const portfolioFeatures: Feature[] = [
   },
   {
     title: 'Markdown blog',
-    desc: 'Posts stored in SQLite, rendered with react-markdown, served at clean slug-based URLs.',
+    desc: 'Posts stored in Postgres, rendered with react-markdown, served at clean slug-based URLs.',
   },
 ];
 
@@ -177,7 +177,7 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export const metadata = {
-  title: 'Projects | Portfolio',
+  title: 'Projects | Mufeed Batis',
   description:
     'Windows system tools, native desktop apps, and a full-stack web application: things I have built and can explain piece by piece.',
 };
@@ -196,7 +196,7 @@ export default function ProjectsPage() {
             description:
               'A full-stack application with a real front-end, a real back-end, and a real database. It has public pages, a markdown blog, a contact form that persists submissions, and a password-protected admin area for writing and editing posts. Every architectural decision, the data model, the auth flow, the API design, and the page structure, is mine.',
             features: portfolioFeatures,
-            stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'SQLite', 'JWT'],
+            stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Postgres', 'JWT'],
             localLabel: 'This site',
           }}
         />

@@ -1,7 +1,7 @@
 # Portfolio & Blog Platform
 
 A full-stack portfolio site I designed and built from scratch. It has a public front-end, a
-REST API back-end, a SQLite database, and a password-protected admin area for writing and
+REST API back-end, a Postgres database, and a password-protected admin area for writing and
 publishing blog posts.
 
 The point of this project was to answer a real question, "have you built something you can
@@ -9,15 +9,16 @@ explain piece by piece?" This is that something.
 
 ## Deploying
 
-The contact form, admin panel and blog need a writable SQLite file, so the
-database location is configurable. On a host, point it at a persistent volume
-so data survives restarts.
+The contact form, admin panel and blog read and write a real database on every request, so
+they need a reachable Postgres connection at runtime.
 
-| Variable       | Required        | Purpose                                                        |
-| -------------- | --------------- | -------------------------------------------------------------- |
-| `DATABASE_PATH`| on a host       | Path to the SQLite file, e.g. `/data/portfolio.db`             |
-| `JWT_SECRET`   | in production   | Signs admin sessions. The server refuses to sign tokens without it |
-| `ADMIN_PASSWORD`| recommended    | Admin password. A random one is generated and printed if unset |
+| Variable        | Required        | Purpose                                                             |
+| --------------- | --------------- | ------------------------------------------------------------------- |
+| `DATABASE_URL`  | yes             | Postgres connection string. Supabase: Project Settings, Database, Connection string, URI |
+| `JWT_SECRET`    | in production   | Signs admin sessions. The server refuses to sign tokens without it  |
+| `ADMIN_PASSWORD`| recommended     | Admin password. A random one is generated and printed if unset      |
+
+Use the Supabase pooled connection (port 6543) on a serverless host such as Vercel.
 
 ## Running locally
 
@@ -26,10 +27,10 @@ To see it running locally, follow the setup below.
 ## Features
 
 - **Full-stack Next.js (App Router)**, written in TypeScript end to end
-- **SQLite database** via better-sqlite3, with WAL mode for concurrent reads
+- **Postgres database** on Supabase, with a hand-written schema for posts, contacts, and the admin user
 - **Authentication**: bcrypt-hashed passwords, JWT sessions in an HttpOnly cookie
 - **Admin dashboard**: create, edit, and delete blog posts
-- **Markdown blog**: posts stored in SQLite and rendered with react-markdown at slug URLs
+- **Markdown blog**: posts stored in Postgres and rendered with react-markdown at slug URLs
 - **Contact form**: submissions validated and persisted to the database
 - **REST API**: posts CRUD, contact submission, and session endpoints
 
@@ -40,7 +41,7 @@ To see it running locally, follow the setup below.
 | Framework | Next.js 16 (App Router, Turbopack)       |
 | Language  | TypeScript                               |
 | UI        | React 19, Tailwind CSS 4                 |
-| Database  | SQLite (better-sqlite3)                  |
+| Database  | Postgres (Supabase)                      |
 | Auth      | jsonwebtoken, bcryptjs                   |
 
 ## Getting started
@@ -59,9 +60,10 @@ npm install
 cp .env.example .env
 ```
 
-Then edit `.env` and set two values:
+Then edit `.env` and set the database connection:
 
 ```bash
+DATABASE_URL=postgresql://postgres:password@db.yourproject.supabase.co:5432/postgres
 ADMIN_PASSWORD=your-admin-password
 JWT_SECRET=long-random-string-here
 ```
@@ -110,7 +112,7 @@ src/
 
 ## Database
 
-SQLite, stored as `portfolio.db` in the project root. Three tables:
+Postgres, hosted on Supabase. Three tables:
 
 | Table      | Purpose                                          |
 | ---------- | ------------------------------------------------ |
@@ -118,8 +120,9 @@ SQLite, stored as `portfolio.db` in the project root. Three tables:
 | `contacts` | Contact form submissions                         |
 | `admin`    | Single admin user with a bcrypt-hashed password  |
 
-The schema is created automatically on first run, along with a default admin user and three
-sample posts. The database file is gitignored, so it is never committed.
+The schema is created automatically on the first request, along with a default admin user and
+three sample posts. Seeding only runs when the tables are empty, so a redeploy never
+duplicates them.
 
 ## A note on how this was built
 

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'About | Portfolio',
+  title: 'About | Mufeed Batis',
   description:
     'A software developer working across Windows system programming, native desktop apps, and full-stack web.',
 };
@@ -11,7 +11,7 @@ export default function AboutPage() {
 
       <div className="space-y-6 text-secondary leading-relaxed">
         <p className="text-lg text-primary">
-          I&apos;m a developer who learned by building. This site is proof of that:
+          I&apos;m Mufeed Batis, a developer who learned by building. This site is proof of that:
           a full-stack application I designed, architected, and shipped myself,
           alongside a set of Windows tools I wrote to solve my own problems.
         </p>
@@ -37,7 +37,7 @@ export default function AboutPage() {
             { title: 'C# / .NET', desc: 'WinForms, WinUI 3, Windows App SDK, tray apps, system utilities' },
             { title: 'Windows API', desc: 'Win32 interop, window management, process control, input hooks' },
             { title: 'Next.js / React', desc: 'App Router, server and client components, TypeScript end to end' },
-            { title: 'Databases & APIs', desc: 'SQLite, REST endpoints, CRUD, authentication' },
+            { title: 'Databases & APIs', desc: 'Postgres, REST endpoints, CRUD, authentication' },
             { title: 'Java / Android', desc: 'Accessibility services, foreground services, system APIs' },
             { title: 'Git', desc: 'Version control, branching, merge workflows' },
           ].map(skill => (

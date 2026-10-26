@@ -37,7 +37,7 @@ export async function getSession() {
 }
 
 export async function login(username: string, password: string) {
-  const user = authenticateUser(username, password);
+  const user = await authenticateUser(username, password);
   if (!user) return null;
   return { user, token: signToken(user) };
 }

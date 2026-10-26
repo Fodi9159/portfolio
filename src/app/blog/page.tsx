@@ -1,11 +1,18 @@
 import Link from 'next/link';
 import { getDB } from '@/lib/db';
 
-export const metadata = { title: 'Blog | Portfolio', description: 'Thoughts, notes, and things I have learned building software.' };
+// The blog reads from Postgres, which is not reachable while `next build` runs
+// on a serverless host, so these pages are rendered on demand instead of at
+// build time.
+export const dynamic = 'force-dynamic';
+
+export const metadata = { title: 'Blog | Mufeed Batis', description: 'Thoughts, notes, and things I have learned building software.' };
 
 export default async function BlogPage() {
-  const db = getDB();
-  const posts = db.prepare('SELECT id, title, slug, excerpt, created_at FROM posts WHERE published = 1 ORDER BY created_at DESC').all();
+  const db = await getDB();
+  const posts = await db<
+    { id: number; title: string; slug: string; excerpt: string | null; created_at: Date }[]
+  >`SELECT id, title, slug, excerpt, created_at FROM posts WHERE published = ${true} ORDER BY created_at DESC`;
 
   return (
     <div className="max-w-3xl mx-auto py-20">

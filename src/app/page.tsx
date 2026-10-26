@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Portfolio | Software Developer',
+  title: 'Mufeed Batis | Software Developer',
   description:
     'A software developer who builds Windows system tools, native desktop apps, and full-stack web applications.',
 };

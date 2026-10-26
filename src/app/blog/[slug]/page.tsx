@@ -1,21 +1,28 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
-import { getDB } from '@/lib/db';
+import { getDB, type Post } from '@/lib/db';
+
+// Reads from Postgres at request time, so it is never prerendered.
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const db = getDB();
-  const post = db.prepare('SELECT title, excerpt FROM posts WHERE slug = ? AND published = 1').get(slug);
+  const db = await getDB();
+  const rows = await db<Pick<Post, 'title' | 'excerpt'>[]>`
+    SELECT title, excerpt FROM posts WHERE slug = ${slug} AND published = ${true}
+  `;
+  const post = rows[0];
   if (post) {
-    return { title: `${post.title} | Portfolio`, description: post.excerpt || post.title };
+    return { title: `${post.title} | Mufeed Batis`, description: post.excerpt || post.title };
   }
-  return { title: 'Post | Portfolio' };
+  return { title: 'Post | Mufeed Batis' };
 }
 
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
-  const db = getDB();
-  const post = db.prepare('SELECT * FROM posts WHERE slug = ? AND published = 1').get(slug);
+  const db = await getDB();
+  const rows = await db<Post[]>`SELECT * FROM posts WHERE slug = ${slug} AND published = ${true}`;
+  const post = rows[0];
 
   if (!post) {
     return (

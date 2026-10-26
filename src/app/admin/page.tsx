@@ -9,7 +9,7 @@ type Post = {
   title: string;
   slug: string;
   created_at: string;
-  published: number;
+  published: boolean;
 };
 
 export default function AdminDashboard() {
@@ -29,7 +29,7 @@ export default function AdminDashboard() {
       setAuthChecked(true);
 
       try {
-        const res = await fetch('/api/posts');
+        const res = await fetch('/api/admin/posts');
         if (res.ok) setPosts(await res.json());
       } catch (err) {
         console.error(err);
@@ -42,7 +42,7 @@ export default function AdminDashboard() {
     if (!confirm('Delete this post?')) return;
     const res = await fetch(`/api/posts/${id}`, { method: 'DELETE' });
     if (res.ok) {
-      const updated = await fetch('/api/posts');
+      const updated = await fetch('/api/admin/posts');
       if (updated.ok) setPosts(await updated.json());
     }
   };

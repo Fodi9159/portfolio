@@ -35,9 +35,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
     if (!authChecked) return;
     (async () => {
       try {
-        const res = await fetch('/api/posts');
+        const res = await fetch('/api/admin/posts');
         if (res.ok) {
-          const posts: Array<{ id: number; title: string; slug: string; content: string; excerpt: string; published: number }> = await res.json();
+          const posts: Array<{ id: number; title: string; slug: string; content: string; excerpt: string; published: boolean }> = await res.json();
           const post = posts.find(p => p.id == Number(id));
           if (post) {
             setForm({

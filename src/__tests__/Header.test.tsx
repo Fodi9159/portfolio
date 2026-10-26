@@ -20,7 +20,7 @@ describe('Header', () => {
 
   it('renders the logo', () => {
     render(<Header />);
-    expect(screen.getByRole('link', { name: /Portfolio\./ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Mufeed Batis\./ })).toBeInTheDocument();
   });
 
   it('renders all navigation links', () => {

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'Portfolio | Software Developer',
+  title: 'Mufeed Batis | Software Developer',
   description:
     'Windows system tools, native desktop apps, and full-stack web applications, built and explained piece by piece.',
 };
