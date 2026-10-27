@@ -1,20 +1,24 @@
 import { getDB } from '@/lib/db';
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const slug = searchParams.get('slug');
-  const db = await getDB();
+  try {
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get('slug');
+    const db = await getDB();
 
-  if (slug) {
-    const rows = await db`SELECT * FROM posts WHERE slug = ${slug} AND published = ${true}`;
-    if (rows.length === 0) {
-      return Response.json(null, { status: 404 });
+    if (slug) {
+      const rows = await db`SELECT * FROM posts WHERE slug = ${slug} AND published = ${true}`;
+      if (rows.length === 0) {
+        return Response.json(null, { status: 404 });
+      }
+      return Response.json(rows[0]);
     }
-    return Response.json(rows[0]);
-  }
 
-  const posts = await db`SELECT * FROM posts WHERE published = ${true} ORDER BY created_at DESC`;
-  return Response.json(posts);
+    const posts = await db`SELECT * FROM posts WHERE published = ${true} ORDER BY created_at DESC`;
+    return Response.json(posts);
+  } catch (err) {
+    return Response.json({ error: (err as Error).message }, { status: 500 });
+  }
 }
 
 export async function POST(request) {
