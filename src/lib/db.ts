@@ -87,16 +87,19 @@ async function initSchema(db: Sql) {
     )
   `;
 
-  // Seed or update the admin user. The password always comes from the
-  // ADMIN_PASSWORD environment variable so that changing it in the host
-  // environment takes effect on the next request, not just on first run.
+  // Seed or update the admin user. Both username and password come from
+  // environment variables so they can be controlled from Vercel without
+  // code changes or database resets.
+  const adminUsername = process.env.ADMIN_USERNAME || 'admin';
   const defaultPassword = process.env.ADMIN_PASSWORD || crypto.randomUUID().slice(0, 16);
   const hashed = bcrypt.hashSync(defaultPassword, 10);
-  const adminRow = await db<{ id: number }[]>`SELECT id FROM admin LIMIT 1`;
+  const adminRow = await db<{ id: number; username: string }[]>`SELECT id, username FROM admin LIMIT 1`;
   if (adminRow.length === 0) {
-    await db`INSERT INTO admin (username, password) VALUES (${'admin'}, ${hashed})`;
+    await db`INSERT INTO admin (username, password) VALUES (${adminUsername}, ${hashed})`;
+  } else if (adminRow[0].username === adminUsername) {
+    await db`UPDATE admin SET password = ${hashed} WHERE username = ${adminUsername}`;
   } else {
-    await db`UPDATE admin SET password = ${hashed} WHERE username = ${'admin'}`;
+    await db`UPDATE admin SET username = ${adminUsername}, password = ${hashed} WHERE id = ${adminRow[0].id}`;
   }
   if (!process.env.ADMIN_PASSWORD) {
     console.log(
