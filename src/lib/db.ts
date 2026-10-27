@@ -87,18 +87,21 @@ async function initSchema(db: Sql) {
     )
   `;
 
-  // Seed the admin user if the table is empty. The password comes from the
-  // environment, or a random one is generated and printed once.
-  const existing = await db<{ id: number }[]>`SELECT id FROM admin LIMIT 1`;
-  if (existing.length === 0) {
-    const defaultPassword = process.env.ADMIN_PASSWORD || crypto.randomUUID().slice(0, 16);
-    const hashed = bcrypt.hashSync(defaultPassword, 10);
+  // Seed or update the admin user. The password always comes from the
+  // ADMIN_PASSWORD environment variable so that changing it in the host
+  // environment takes effect on the next request, not just on first run.
+  const defaultPassword = process.env.ADMIN_PASSWORD || crypto.randomUUID().slice(0, 16);
+  const hashed = bcrypt.hashSync(defaultPassword, 10);
+  const adminRow = await db<{ id: number }[]>`SELECT id FROM admin LIMIT 1`;
+  if (adminRow.length === 0) {
     await db`INSERT INTO admin (username, password) VALUES (${'admin'}, ${hashed})`;
-    if (!process.env.ADMIN_PASSWORD) {
-      console.log(
-        `[portfolio] ADMIN_PASSWORD is not set. Generated a random password: ${defaultPassword}`
-      );
-    }
+  } else {
+    await db`UPDATE admin SET password = ${hashed} WHERE username = ${'admin'}`;
+  }
+  if (!process.env.ADMIN_PASSWORD) {
+    console.log(
+      `[portfolio] ADMIN_PASSWORD is not set. Using generated password: ${defaultPassword}`
+    );
   }
 
   // Seed sample posts only when the blog is empty, so a redeploy never
